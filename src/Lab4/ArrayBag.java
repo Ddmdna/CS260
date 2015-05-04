@@ -447,7 +447,7 @@ public class ArrayBag<E> implements Cloneable, Iterable
 	       if(this.hasNext()) {
 	           int current = cursor;
 	           cursor ++;
-	           return (E) data[cursor];
+	           return (E) data[current];
 	       }
 	       throw new NoSuchElementException();
 	   }
