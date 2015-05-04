@@ -1,7 +1,6 @@
-// File: ArrayBag.java from the package edu.colorado.collections
-// Additional javadoc documentation is available from the ArrayBag link in:
-//   http://www.cs.colorado.edu/~main/docs
-import java.util.Arrays;
+package Lab4;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /******************************************************************************
 * An ArrayBag is a generic collection of references to objects.
@@ -36,7 +35,7 @@ import java.util.Arrays;
 * @see IntArrayBag
 * @see LinkedBag
 ******************************************************************************/
-public class ArrayBag<E> implements Cloneable
+public class ArrayBag<E> implements Cloneable, Iterable
 {
    // Invariant of the ArrayBag class:
    //   1. The number of elements in the bag is in the instance variable 
@@ -46,7 +45,7 @@ public class ArrayBag<E> implements Cloneable
    //      through data[manyItems-1], and we don't care what's in the
    //      rest of data.
    private Object[ ] data;
-   private int manyItems; 
+   private int manyItems;
    
    /**
    * Initialize an empty bag with an initial capacity of 10.  Note that the
@@ -55,6 +54,7 @@ public class ArrayBag<E> implements Cloneable
    * @param - none
    * @postcondition
    *   This bag is empty and has an initial capacity of 10.
+   *   The currentItem is set to 0
    * @exception OutOfMemoryError
    *   Indicates insufficient memory for: 
    *   new Object[10].
@@ -77,6 +77,7 @@ public class ArrayBag<E> implements Cloneable
    *   initialCapacity is non-negative.
    * @postcondition
    *   This bag is empty and has the given initial capacity.
+   *   The currentItem is set to 0
    * @exception IllegalArgumentException
    *   Indicates that initialCapacity is negative.
    * @exception OutOfMemoryError
@@ -418,6 +419,42 @@ public class ArrayBag<E> implements Cloneable
       
       return answer;
    }
-      
+
+   public Iterator<E> iterator() {
+		// TODO Auto-generated method stub
+		return new BagIterator(data, manyItems);
+	}
+   
+   // Inner class example
+   private static final class BagIterator<E> implements Iterator<E> 
+   {
+	   //private Object[ ] data;
+	   private int cursor;
+	   private final int end;
+	   private E[] data;
+	
+	   public BagIterator(E[] data, int end) {
+	       this.cursor = 0;
+	       this.end = end;
+	       this.data = data;
+	   }
+	
+	   public boolean hasNext() {
+	       return this.cursor < end;
+	   }
+	
+	   public E next() {
+	       if(this.hasNext()) {
+	           int current = cursor;
+	           cursor ++;
+	           return (E) data[cursor];
+	       }
+	       throw new NoSuchElementException();
+	   }
+	
+	   public void remove() {
+	       throw new UnsupportedOperationException();
+	   }
+   }
 }
            
