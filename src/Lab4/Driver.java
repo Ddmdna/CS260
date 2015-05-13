@@ -36,9 +36,34 @@ import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
 public class Driver {
 	public static void main(String[] args)
 	{
+		Result result;
+		System.out.println("Starting Tests...");
+		
+		//Run through DriverTest tests and note the success
+		result = JUnitCore.runClasses(DriverTest.class);
+	    for (Failure fail : result.getFailures()) {
+	        System.out.println(fail.toString());
+	    }
+	    if (result.wasSuccessful()) {
+	        System.out.println("All tests finished successfully...");
+	    }
+		
+	  //Run through ArrayBagTest tests and note the success
+	    result = JUnitCore.runClasses(ArrayBagTest.class);
+	    for (Failure fail : result.getFailures()) {
+	        System.out.println(fail.toString());
+	    }
+	    if (result.wasSuccessful()) {
+	        System.out.println("All tests finished successfully...");
+	    }
+	    System.out.println("Tests Finished\n");
 		//File to be accessed
 		final String CHORE_LIST_FILE_NAME = "ChoreList.txt";
 		

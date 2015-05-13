@@ -308,6 +308,7 @@ public class ArrayBagTest extends ArrayBag {
 
 	@Test
 	public void testIterator() {
+		fail("Not yet implemented");
 		//Test that this does not return a null?
 		//I would probably need to test the class in a separate file...
 	}

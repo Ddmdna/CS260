@@ -13,7 +13,7 @@ public class DriverTest extends Driver {
 	
 	@Test
 	public void test_loadBagFromFile() {
-		//fail("Not yet implemented");
+		fail("Not yet implemented");
 		//Put something into a stream
 		//Load from stream into the ArrayBag
 		//check results
@@ -24,6 +24,9 @@ public class DriverTest extends Driver {
 	
 	@Test
 	public void test_printArrayBag(){
+		//Get original
+		PrintStream original = new PrintStream(System.out);
+		
 		//Change the stream that the function prints to
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
@@ -33,7 +36,7 @@ public class DriverTest extends Driver {
 			e.printStackTrace();
 			fail("Failed to set up PrintStream to a ByteArrayOutputStream");
 		}
-
+		
 		//Set up preconditions to test zero chores
 		ArrayBag<String> chores = new ArrayBag<String>();
 		
@@ -56,12 +59,12 @@ public class DriverTest extends Driver {
 		assertEquals(first + "\r\n" + middle + "\r\n" + last + "\r\n", content);
 		
 		//Revert the print stream to System.out
-		System.setOut(System.out);
+		System.setOut(original);
 	}
 	
 	@Test
 	public void test_getChar(){
-		//fail("Not yet implemented");
+		fail("Not yet implemented");
 		//Will need to set up a temp InputStream?
 		//Test single character
 		//Test multiple characters
@@ -70,7 +73,7 @@ public class DriverTest extends Driver {
 	
 	@Test
 	public void test_getString(){
-		//fail("Not yet implemented");
+		fail("Not yet implemented");
 		//Will need to set up a temp InputStream?
 		//Test single character
 		//Test multiple characters
@@ -79,7 +82,7 @@ public class DriverTest extends Driver {
 	
 	@Test
 	public void test_saveBagToFile(){
-		//fail("Not yet implemented");
+		fail("Not yet implemented");
 		//Would I need to change SaveBagToFile to saving to a stream?
 		//Then I could read from the string to ensure correct output
 	}
