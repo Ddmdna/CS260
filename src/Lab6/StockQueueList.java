@@ -58,7 +58,7 @@ public class StockQueueList {
 	//precondition queueList is not empty
 	public StockQueue getStockQueueAtIndexFromHead(int offset){
 		if(size == 0) throw new IllegalStateException("Can't get a stockQueue when size is 0");
-		StockQueue stockQueue = queueList.get(currentHeadIndex + offset);
+		StockQueue stockQueue = queueList.get((currentHeadIndex + offset) % size);
 		return stockQueue;
 	}
 	
@@ -70,7 +70,7 @@ public class StockQueueList {
 		for(Iterator<StockQueue> i = queueList.iterator(); i.hasNext(); count++) 
 		{
 		    StockQueue item = i.next();
-		    if(item.getStockName() == stockName)
+		    if(item.getStockName().compareTo(stockName) == 0)
 		    	index = count;
 		}
 		return index;
@@ -95,5 +95,10 @@ public class StockQueueList {
 
 	public StockQueue getAtIndex(int index) {
 		return queueList.get(index);
+	}
+	
+	public void remove(int index){
+		queueList.remove(index);
+		size--;
 	}
 }

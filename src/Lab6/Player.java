@@ -36,18 +36,19 @@ public class Player {
 	//This might be useful for a person holding the stock...
 	public boolean sellStock(String stockName, int quantity, double price){
 		boolean stockSold = false;
-		double capitalGained = 0.0;
 		
 		int index = myStockQueueList.findIndexOfStockQueue(stockName);
 		if(index != -1) //Remove stock from the index that does not equal -1
 		{
-			capitalGained = myStockQueueList.getAtIndex(index).removeStock(quantity);
-		}
-		if(capitalGained > 0.0)
-		{
-			//Gained capital
-			updateMoney(capitalGained);
-			stockSold = true;
+			if(myStockQueueList.getAtIndex(index).getTotalQuantity() >= quantity){
+				//Gained capital
+				updateMoney(quantity * price);
+			}
+			if(myStockQueueList.getAtIndex(index).removeStock(quantity) > 0.0)
+				stockSold = true;
+			if(myStockQueueList.getAtIndex(index).getTotalQuantity() == 0){
+				myStockQueueList.remove(index);
+			}
 		}
 		return stockSold;
 	}
@@ -55,5 +56,17 @@ public class Player {
 	private void updateMoney(double capitalGained){
 		currentCapital += capitalGained;
 		profit = currentCapital - initialCapital;
+	}
+	
+	public double getProfit(){
+		return profit;
+	}
+	
+	public StockQueueList getMyStockQueueList(){
+		return myStockQueueList;
+	}
+	
+	public double getCurrentCapital(){
+		return currentCapital;
 	}
 }

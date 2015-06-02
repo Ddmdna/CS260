@@ -12,9 +12,10 @@ public class Timeline {
 	private int currentDay; //Updates at the start of each day
 	private int numberOfDays;
 	public Timeline(InputStream dataStream, int numberOfStocks, int numberOfDays){
-		currentDay = 0;
+		currentDay = 0; //I guess this is just a counter
 		this.numberOfDays = numberOfDays;
-	
+		
+		dayStack = new Stack<Day>();
 		Day tempDay;
 		String[] stockNameList;
 		double[] stockPriceList;
@@ -62,7 +63,7 @@ public class Timeline {
 			stockNameList[i] =  stockNameMatcher.group(1);
 		}
 		
-		//Get the stock prices for the current day
+		//Get the stock prices for the current day(working backwards to fit stack...)
 		for(currentDay = numberOfDays; currentDay > 0; currentDay--){
 			//Reset the dataScanner
 			dataScanner = new Scanner(dataBlob);
@@ -108,6 +109,7 @@ public class Timeline {
 	}
 	
 	public Day getNextDay(){
+		currentDay++;
 		return dayStack.pop();
 	}
 	

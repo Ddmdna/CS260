@@ -38,7 +38,7 @@ public class StockQueue {
 		double tempPrice;
 		
 		//Remove stock if there is enough in the queue
-		if(quantityToRemove >= totalQuantity)
+		if(quantityToRemove <= totalQuantity)
 		{
 			//Update totalQuantity
 			totalQuantity -= quantityToRemove;
@@ -61,6 +61,7 @@ public class StockQueue {
 					topQuantity -= quantityToRemove;
 					capitalOfRemovedStock += tempPrice * quantityToRemove;
 					queue.peek().setQuantity(topQuantity);
+					quantityToRemove = 0;
 				}
 			}
 			//Update topPrice
